@@ -1,0 +1,13 @@
+{
+  "name": "@bookrate/mobile",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "expo start",
+    "build": "expo prebuild",
+    "typecheck": "tsc --noEmit",
+    "lint": "expo lint"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

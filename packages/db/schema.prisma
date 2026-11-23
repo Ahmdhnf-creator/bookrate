@@ -1,0 +1,62 @@
+// ============================================
+// schema.prisma — Hanya objek baru yang dikelola Prisma Migrate
+// Tabel lama dari SQL 001–005 dikecualikan (dikelola SQL manual, owned by postgres)
+// ============================================
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// Tabel baru yang dikelola Prisma Migrate
+// ============================================
+
+model book_tags {
+  id        String   @id @default(cuid())
+  book_id   String
+  tag_name  String
+  created_at DateTime @default(now())
+
+  @@index([book_id])
+  @@index([tag_name])
+  @@unique([book_id, tag_name])
+}
+
+model book_categories {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  created_at DateTime @default(now())
+
+  @@index([name])
+  @@index([slug])
+}
+
+model reading_goals {
+  id        String   @id @default(cuid())
+  user_id   String
+  target_books Int
+  period    String   // "monthly", "yearly", "quarterly"
+  year      Int
+  created_at DateTime @default(now())
+
+  @@index([user_id])
+  @@index([user_id, year])
+}
+
+model book_quotes {
+  id        String   @id @default(cuid())
+  book_id   String
+  user_id   String
+  content   String
+  page_number Int?
+  created_at DateTime @default(now())
+
+  @@index([book_id])
+  @@index([user_id])
+}
