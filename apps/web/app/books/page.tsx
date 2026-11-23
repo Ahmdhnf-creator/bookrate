@@ -47,6 +47,23 @@ export default async function BooksPage() {
           ))}
           {bookTags.length === 0 && <p className="text-gray-500">Belum ada tag buku.</p>}
         </div>
+
+        <div className="mt-8 flex flex-col gap-2">
+          <a
+            href="/books/categories"
+            className="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200"
+          >
+            <span className="font-medium">Kategori Buku</span>
+            <span className="text-sm text-gray-500">Lihat semua kategori</span>
+          </a>
+          <a
+            href="/books/goals"
+            className="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200"
+          >
+            <span className="font-medium">Tujuan Membaca</span>
+            <span className="text-sm text-gray-500">Lihat semua tujuan</span>
+          </a>
+        </div>
       </section>
     </main>
   )
