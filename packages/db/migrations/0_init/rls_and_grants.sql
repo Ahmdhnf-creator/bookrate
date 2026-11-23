@@ -26,20 +26,20 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.reading_goals TO authentica
 
 CREATE POLICY reading_goals_select_own ON public.reading_goals
   FOR SELECT TO authenticated
-  USING (user_id = auth.uid());
+  USING (user_id = auth.uid()::text);
 
 CREATE POLICY reading_goals_insert_own ON public.reading_goals
   FOR INSERT TO authenticated
-  WITH CHECK (user_id = auth.uid());
+  WITH CHECK (user_id = auth.uid()::text);
 
 CREATE POLICY reading_goals_update_own ON public.reading_goals
   FOR UPDATE TO authenticated
-  USING (user_id = auth.uid())
-  WITH CHECK (user_id = auth.uid());
+  USING (user_id = auth.uid()::text)
+  WITH CHECK (user_id = auth.uid()::text);
 
 CREATE POLICY reading_goals_delete_own ON public.reading_goals
   FOR DELETE TO authenticated
-  USING (user_id = auth.uid());
+  USING (user_id = auth.uid()::text);
 
 -- ============================================
 -- book_quotes — RLS: user hanya bisa lihat/mengubah quote miliknya sendiri
@@ -50,17 +50,17 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.book_quotes TO authenticate
 
 CREATE POLICY book_quotes_select_own ON public.book_quotes
   FOR SELECT TO authenticated
-  USING (user_id = auth.uid());
+  USING (user_id = auth.uid()::text);
 
 CREATE POLICY book_quotes_insert_own ON public.book_quotes
   FOR INSERT TO authenticated
-  WITH CHECK (user_id = auth.uid());
+  WITH CHECK (user_id = auth.uid()::text);
 
 CREATE POLICY book_quotes_update_own ON public.book_quotes
   FOR UPDATE TO authenticated
-  USING (user_id = auth.uid())
-  WITH CHECK (user_id = auth.uid());
+  USING (user_id = auth.uid()::text)
+  WITH CHECK (user_id = auth.uid()::text);
 
 CREATE POLICY book_quotes_delete_own ON public.book_quotes
   FOR DELETE TO authenticated
-  USING (user_id = auth.uid());
+  USING (user_id = auth.uid()::text);
