@@ -63,6 +63,13 @@ export default async function BooksPage() {
             <span className="font-medium">Tujuan Membaca</span>
             <span className="text-sm text-gray-500">Lihat semua tujuan</span>
           </a>
+          <a
+            href="/books/quotes"
+            className="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200"
+          >
+            <span className="font-medium">Quote Buku</span>
+            <span className="text-sm text-gray-500">Lihat semua quote</span>
+          </a>
         </div>
       </section>
     </main>
