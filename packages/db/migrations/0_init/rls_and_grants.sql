@@ -1,7 +1,7 @@
 -- ============================================
 -- RLS & Grant untuk tabel baru dari Prisma Migrate
-// Tabel lama (SQL 001–005) dikecualikan — dikelola SQL manual
-// ============================================
+-- Tabel lama (SQL 001–005) dikecualikan — dikelola SQL manual
+-- ============================================
 
 -- ============================================
 -- book_tags — readable by authenticated users
