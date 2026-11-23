@@ -4,18 +4,28 @@
 -- ============================================
 
 -- ============================================
--- book_tags — readable by authenticated users
+-- book_tags — full access for authenticated users (no user_id column, global tags)
 -- ============================================
 ALTER TABLE public.book_tags ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON TABLE public.book_tags FROM anon, authenticated;
-GRANT SELECT ON TABLE public.book_tags TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.book_tags TO authenticated;
+
+CREATE POLICY book_tags_all_auth ON public.book_tags
+  FOR ALL TO authenticated
+  USING (true)
+  WITH CHECK (true);
 
 -- ============================================
--- book_categories — readable by authenticated users
+-- book_categories — full access for authenticated users (no user_id column, global categories)
 -- ============================================
 ALTER TABLE public.book_categories ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON TABLE public.book_categories FROM anon, authenticated;
-GRANT SELECT ON TABLE public.book_categories TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.book_categories TO authenticated;
+
+CREATE POLICY book_categories_all_auth ON public.book_categories
+  FOR ALL TO authenticated
+  USING (true)
+  WITH CHECK (true);
 
 -- ============================================
 -- reading_goals — RLS: user hanya bisa lihat/mengubah goal miliknya sendiri
