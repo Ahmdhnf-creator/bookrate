@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../src/generated'
+import type { PrismaClient } from '../../src/generated'
 import { prisma } from './client'
 
 export type UserContext = {
@@ -19,7 +19,9 @@ export type UserContext = {
  */
 export async function withUserContext<T>(
   claims: UserContext,
-  fn: (tx: Omit<PrismaClient<PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$use" | "$extends">) => Promise<T>,
+  fn: (
+    tx: Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$use' | '$extends'>,
+  ) => Promise<T>,
 ): Promise<T> {
   return prisma.$transaction(async (tx) => {
     await tx.$executeRaw`SET LOCAL ROLE authenticated`

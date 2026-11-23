@@ -1,4 +1,4 @@
-import type { book_tags, PrismaClient } from '@prisma/client'
+import type { book_tags } from '../src/lib/db'
 import { withUserContext } from '../src/lib/db'
 
 export default async function HomePage() {
@@ -9,7 +9,7 @@ export default async function HomePage() {
     role: 'authenticated',
   }
 
-  const bookTags = await withUserContext(claims, async (tx: PrismaClient) => {
+  const bookTags = await withUserContext(claims, async (tx) => {
     return tx.book_tags.findMany({
       orderBy: { created_at: 'desc' },
       take: 10,

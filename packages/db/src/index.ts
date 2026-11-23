@@ -1,1 +1,8 @@
+export type {
+  book_categories,
+  book_quotes,
+  book_tags,
+  PrismaClient,
+  reading_goals,
+} from '../../src/generated'
 export { type UserContext, withUserContext } from './user-context'
