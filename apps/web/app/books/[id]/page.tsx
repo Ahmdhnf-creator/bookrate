@@ -46,6 +46,16 @@ export default async function BookDetailPage({ params }: { params: { id: string 
     )
   }
 
+  async function deleteBook(formData: FormData) {
+    const id = formData.get('id') as string
+
+    await withUserContext(claims, async (tx) => {
+      return tx.book_tags.delete({
+        where: { id },
+      })
+    })
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
       <section className="flex w-full max-w-2xl flex-col items-center justify-center p-6">
@@ -69,9 +79,19 @@ export default async function BookDetailPage({ params }: { params: { id: string 
             <span className="text-sm text-gray-500">{book.created_at.toString()}</span>
           </div>
         </div>
+        <form action={deleteBook} className="mt-8 flex flex-col gap-4" method="POST">
+          <input type="hidden" name="id" value={book.id} />
+          <button
+            type="submit"
+            onClick={() => window.confirm('Yakin ingin menghapus buku ini?')}
+            className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+          >
+            Hapus Buku
+          </button>
+        </form>
         <a
           href="/books"
-          className="mt-8 inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          className="mt-4 inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
         >
           Kembali ke daftar
         </a>

@@ -30,6 +30,16 @@ export default async function BooksPage() {
     })
   })
 
+  async function deleteBookTag(formData: FormData) {
+    const id = formData.get('id') as string
+
+    await withUserContext(claims, async (tx) => {
+      return tx.book_tags.delete({
+        where: { id },
+      })
+    })
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
       <section className="flex w-full max-w-2xl flex-col items-center justify-center p-6">
@@ -41,8 +51,20 @@ export default async function BooksPage() {
               key={tag.id}
               className="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200"
             >
-              <span className="font-medium">{tag.tag_name}</span>
-              <span className="text-sm text-gray-500">{tag.book_id}</span>
+              <div>
+                <span className="font-medium">{tag.tag_name}</span>
+                <span className="text-sm text-gray-500">{tag.book_id}</span>
+              </div>
+              <form action={deleteBookTag} method="POST">
+                <input type="hidden" name="id" value={tag.id} />
+                <button
+                  type="submit"
+                  onClick={() => window.confirm('Yakin ingin menghapus tag ini?')}
+                  className="text-xs text-red-600 hover:text-red-800 font-medium"
+                >
+                  Hapus
+                </button>
+              </form>
             </div>
           ))}
           {bookTags.length === 0 && <p className="text-gray-500">Belum ada tag buku.</p>}
