@@ -16,7 +16,7 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev --filter=@bookrate/web"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
@@ -26,6 +26,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",
     "@prisma/client": "7.10.1",
+    "@prisma/client-runtime-utils": "^7.10.1",
     "dotenv": "^16.4.5",
     "prisma": "7.10.1"
   }
